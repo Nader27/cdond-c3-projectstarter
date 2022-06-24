@@ -45,7 +45,7 @@ jobs:
           key: frontend-build
       - run:
           name: frontend Build
-          command: npm lint
+          command: npm run lint
 
 
   build-backend:
@@ -63,7 +63,7 @@ jobs:
           key: backend-build
       - run:
           name: backend Build
-          command: npm lint
+          command: npm run lint
 
   test-frontend:
     docker:
