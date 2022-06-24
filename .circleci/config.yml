@@ -35,7 +35,9 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - working_directory: frontend
+      - run:
+          name: get frontend directory
+          command: cd frontend
       - restore_cache:
           keys: [frontend-build]
       - run:
@@ -54,7 +56,9 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - working_directory: backend
+      - run:
+          name: get backend directory
+          command: cd backend
       - restore_cache:
           keys: [backend-build]
       - run:
@@ -72,7 +76,9 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - working_directory: frontend
+      - run:
+          name: get frontend directory
+          command: cd frontend
       - restore_cache:
           keys: [frontend-build]
       - run:
@@ -87,7 +93,9 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - working_directory: backend
+      - run:
+          name: get backend directory
+          command: cd backend
       - restore_cache:
           keys: [backend-build]
       - run:
@@ -102,7 +110,9 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - working_directory: frontend
+      - run:
+          name: get frontend directory
+          command: cd frontend
       # Restore from cache
       # Your job code here
 
@@ -111,7 +121,9 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - working_directory: backend
+      - run:
+          name: get backend directory
+          command: cd backend
       # Restore from cache
       # Your job code here
 
