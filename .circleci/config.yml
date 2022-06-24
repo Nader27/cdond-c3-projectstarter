@@ -119,7 +119,7 @@ jobs:
           command: cd backend && npm install
       - run:
           name: backend test
-          command: cd backend && npm audit fix --force && npm audit --audit-level=critical
+          command: cd backend && npm audit fix --legacy-peer-deps && npm audit --audit-level=critical
 
   deploy-infrastructure:
     docker:
