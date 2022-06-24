@@ -35,20 +35,17 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run:
-          name: get frontend directory
-          command: cd ./frontend
       - restore_cache:
           keys: [frontend-build]
       - run:
           name: get frontend dependancies
-          command: npm i
+          command:  cd frontend && npm install
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
       - run:
           name: frontend Build
-          command: npm run lint
+          command: cd frontend && npm run lint
 
 
   build-backend:
@@ -56,63 +53,51 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run:
-          name: get backend directory
-          command: cd ./backend
       - restore_cache:
           keys: [backend-build]
       - run:
           name: get backend dependancies
-          command: npm i
+          command: cd backend && npm install
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
       - run:
           name: backend Build
-          command: npm run lint
+          command: cd backend && npm run lint
 
   test-frontend:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run:
-          name: get frontend directory
-          command: cd ./frontend
       - restore_cache:
           keys: [frontend-build]
       - run:
           name: get frontend dependancies
-          command: npm i
+          command: cd frontend && npm install
       - run:
           name: frontend test
-          command: npm build
+          command: cd frontend && npm run test
                 
   test-backend:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run:
-          name: get backend directory
-          command: cd ./backend
       - restore_cache:
           keys: [backend-build]
       - run:
           name: get backend dependancies
-          command: npm i
+          command: cd backend && npm install
       - run:
           name: backend test
-          command: npm test
+          command: cd backend && npm run test
             
   scan-frontend:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run:
-          name: get frontend directory
-          command: cd ./frontend
       # Restore from cache
       # Your job code here
 
@@ -121,9 +106,6 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run:
-          name: get backend directory
-          command: cd ./backend
       # Restore from cache
       # Your job code here
 
