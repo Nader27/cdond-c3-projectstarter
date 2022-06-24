@@ -37,7 +37,7 @@ jobs:
       - checkout
       - run:
           name: get frontend directory
-          command: cd frontend
+          command: cd ./frontend
       - restore_cache:
           keys: [frontend-build]
       - run:
@@ -58,7 +58,7 @@ jobs:
       - checkout
       - run:
           name: get backend directory
-          command: cd backend
+          command: cd ./backend
       - restore_cache:
           keys: [backend-build]
       - run:
@@ -78,7 +78,7 @@ jobs:
       - checkout
       - run:
           name: get frontend directory
-          command: cd frontend
+          command: cd ./frontend
       - restore_cache:
           keys: [frontend-build]
       - run:
@@ -95,7 +95,7 @@ jobs:
       - checkout
       - run:
           name: get backend directory
-          command: cd backend
+          command: cd ./backend
       - restore_cache:
           keys: [backend-build]
       - run:
@@ -112,7 +112,7 @@ jobs:
       - checkout
       - run:
           name: get frontend directory
-          command: cd frontend
+          command: cd ./frontend
       # Restore from cache
       # Your job code here
 
@@ -123,7 +123,7 @@ jobs:
       - checkout
       - run:
           name: get backend directory
-          command: cd backend
+          command: cd ./backend
       # Restore from cache
       # Your job code here
 
