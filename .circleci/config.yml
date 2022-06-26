@@ -280,7 +280,7 @@ jobs:
                     
   deploy-backend:
     docker:
-      - image: circleci/python:3.7
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - add_ssh_keys:
@@ -291,7 +291,7 @@ jobs:
           name: Install dependencies
           command: |
             sudo apt update
-            sudo apt install -y awscli ansible tar gzip nodejs npm curl
+            sudo apt install -y awscli ansible gzip
       - run:
           name: Deploy backend
           command: |
