@@ -2,7 +2,7 @@
 - name: Copy backend deployment
   become: true
   template:
-    src: "backend/artifact.tar.gz"
+    src: "files/artifact.tar.gz"
     dest: "~/prod/artifact.tar.gz"
 
 - name: extract backend deployment
