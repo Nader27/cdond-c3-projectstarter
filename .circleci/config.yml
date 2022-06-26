@@ -177,7 +177,6 @@ jobs:
             && pip3 install --upgrade pip \
             && pip3 install --no-cache-dir \
             ansible \
-            tar \
             gzip \
             awscli \
             && rm -rf /var/cache/apk/*
@@ -262,7 +261,6 @@ jobs:
             && pip3 install --upgrade pip \
             && pip3 install --no-cache-dir \
             ansible \
-            tar \
             gzip \
             awscli \
             npm \
@@ -297,7 +295,6 @@ jobs:
             && pip3 install --no-cache-dir \
             ansible \
             npm \
-            tar \
             gzip \
             awscli \
             && rm -rf /var/cache/apk/*
