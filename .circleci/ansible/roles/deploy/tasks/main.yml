@@ -13,7 +13,6 @@
     rm artifact.tar.gz
 
 - name: Executing node using pm2
-  become: true
   shell: |
     cd /srv/
     npm install
