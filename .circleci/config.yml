@@ -318,14 +318,15 @@ jobs:
           name: Install dependencies
           command: |
             apk add --no-cache \
-            curl \
-            python3 \
-            py3-pip \
+                curl \
+                nodejs \
+                npm
+            apk add --no-cache \
+                python3 \
+                py3-pip \
             && pip3 install --upgrade pip \
             && pip3 install --no-cache-dir \
-            awscli \
-            nodejs \
-            npm
+                awscli \
             && rm -rf /var/cache/apk/*
       - run:
           name: Get backend url
