@@ -14,6 +14,7 @@ commands:
               echo "Destroying environment: << parameters.workflow_id >> "
               aws cloudformation delete-stack \
               --stack-name "udapeople-frontend-<< parameters.workflow_id >>"
+              aws s3 rm s3://udapeople-<< parameters.workflow_id >> --recursive
               aws cloudformation delete-stack \
               --stack-name "udapeople-backend-<< parameters.workflow_id >>"
 
@@ -27,7 +28,8 @@ commands:
           name: Revert migrations
           when: on_fail
           command: |
-            SUCCESS = $(curl --insecure  https://kvdb.io/y8YX8ZW1Tardqzdjh3nA8/migration_<< parameters.workflow_id >>)
+            export URL=https://kvdb.io/y8YX8ZW1Tardqzdjh3nA8/migration_<< parameters.workflow_id >>
+            SUCCESS = $(curl --insecure  $URL)
             if(( $SUCCESS==1 )); 
             then
               cd ~/project/backend
@@ -355,8 +357,8 @@ jobs:
             fi
       - revert-migrations:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
-      # - destroy-environment:
-      #     workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
+      - destroy-environment:
+          workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
 
   cloudfront-update:
     docker:
