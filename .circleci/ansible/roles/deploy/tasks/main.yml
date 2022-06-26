@@ -1,16 +1,19 @@
 ---
 - name: Copy backend deployment
+  become: true
   template:
     src: "backend/artifact.tar.gz"
     dest: "~/prod/artifact.tar.gz"
 
 - name: extract backend deployment
+  become: true
   shell: |
     cd ~/prod/
     tar -xvzf artifact.tar.gz
     rm artifact.tar.gz
-    
+
 - name: Executing node using pm2
+  become: true
   shell: |
     cd ~/prod/
     npm install
