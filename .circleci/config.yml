@@ -45,13 +45,17 @@ jobs:
           keys: [frontend-build]
       - run:
           name: get frontend dependancies
-          command:  cd frontend && npm install
+          command:  |
+            cd frontend
+            npm install
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
       - run:
           name: frontend Build
-          command: cd frontend && npm run build
+          command: |
+            cd frontend
+            npm run build
 
 
   build-backend:
@@ -63,13 +67,17 @@ jobs:
           keys: [backend-build]
       - run:
           name: get backend dependancies
-          command: cd backend && npm install
+          command: |
+            cd backend
+            npm install
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
       - run:
           name: backend Build
-          command: cd backend && npm run build
+          command: |
+            cd backend
+            npm run build
 
   test-frontend:
     docker:
@@ -80,10 +88,14 @@ jobs:
           keys: [frontend-build]
       - run:
           name: get frontend dependancies
-          command: cd frontend && npm install
+          command: |
+            cd frontend
+            npm install
       - run:
           name: frontend test
-          command: cd frontend && npm run test
+          command: |
+            cd frontend
+            npm run test
                 
   test-backend:
     docker:
@@ -94,10 +106,14 @@ jobs:
           keys: [backend-build]
       - run:
           name: get backend dependancies
-          command: cd backend && npm install
+          command: |
+            cd backend
+            npm install
       - run:
           name: backend test
-          command: cd backend && npm run test
+          command: |
+            cd backend
+            npm run test
             
   scan-frontend:
     docker:
@@ -108,10 +124,15 @@ jobs:
           keys: [frontend-build]
       - run:
           name: get frontend dependancies
-          command: cd frontend && npm install
+          command: |
+            cd frontend
+            npm install
       - run:
           name: frontend test
-          command: cd frontend && npm audit fix --audit-level=critical --force && npm audit --audit-level=critical
+          command: |
+            cd frontend
+            npm audit fix --audit-level=critical --force
+            npm audit --audit-level=critical
 
   scan-backend:
     docker:
@@ -122,10 +143,15 @@ jobs:
           keys: [backend-build]
       - run:
           name: get backend dependancies
-          command: cd backend && npm install
+          command: |
+            cd backend
+            npm install
       - run:
           name: backend test
-          command: cd backend && npm audit fix --legacy-peer-deps && npm audit --audit-level=critical
+          command: |
+            cd backend
+            npm audit fix --legacy-peer-deps
+            npm audit --audit-level=critical
 
   deploy-infrastructure:
     docker:
@@ -212,7 +238,7 @@ jobs:
           command: |
             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
-                curl https://kvdb.io/y8YX8ZW1Tardqzdjh3nA8/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
+                curl --insecure https://kvdb.io/y8YX8ZW1Tardqzdjh3nA8/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
       - revert-migrations:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}" 
