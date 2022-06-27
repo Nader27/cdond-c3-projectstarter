@@ -368,7 +368,7 @@ jobs:
           command: |
             yum update
             curl -sL https://rpm.nodesource.com/setup_10.x | bash -
-            yum install -y gzip nodejs
+            yum install -y tar gzip nodejs
       - run:
           name: Update cloudfront distribution
           command: |
@@ -397,6 +397,11 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            yum update
+            yum install -y tar gzip
       - attach_workspace:
           at: ~/
       # - run:
